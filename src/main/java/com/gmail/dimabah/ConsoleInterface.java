@@ -185,7 +185,11 @@ public class ConsoleInterface {
     private void makeTransaction(Accounts account, Currency currency, BigDecimal amount) {
         String queryString = """
                 UPDATE Accounts a 
-                SET a.amount = (SELECT a.amount + :amount * s.buy / b.sale 
+                SET a.amount = (SELECT 
+                case
+                 when a.currency != :currency then (a.amount + :amount * s.buy / b.sale) 
+                 else (a.amount + :amount) 
+                end
                 FROM ExchangeRates s, ExchangeRates b 
                 WHERE (a.id = :id AND s.currency = :currency AND b.currency = a.currency)) 
                 WHERE a.id = :id
