@@ -291,7 +291,7 @@ public class ConsoleInterface {
                 whereParameter = "WHERE o.client.id=" + whereParameter;
             }
         } else if (name.equals("Transactions")) {
-            System.out.print("Enter id of the account or empty to show all accounts:");
+            System.out.print("Enter id of the account or empty to show all transactions:");
             if (!(whereParameter = sc.nextLine()).isEmpty()) {
                 whereParameter = "WHERE o.account.id=" + whereParameter;
             }
